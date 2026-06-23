@@ -92,6 +92,14 @@ def test_backfill_then_correction_are_distinguished():
     assert any("correction cost" in r for r in s.revisions)
 
 
+def test_malformed_value_is_invalid_not_missing():
+    # A present-but-uncoercible value must be distinguished from an absent one.
+    e = get_parser("claude").parse({"id": "x", "tokens": "not-a-number", "billing_cost": 0.1})
+    assert e.field_status["tokens"] == FieldStatus.INVALID
+    assert e.tokens == 0  # safe default, but provenance tells the truth
+    assert e.silent_risk() is True
+
+
 def test_unresolved_identity_is_quarantined_not_guessed():
     store = EventStore()
     no_id = get_parser("openai").parse({"model": "gpt-4", "tokens": 10})  # request_id missing

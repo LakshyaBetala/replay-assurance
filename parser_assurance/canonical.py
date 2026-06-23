@@ -25,8 +25,9 @@ from typing import Any, Callable, Dict, Optional, Tuple
 class FieldStatus(str, Enum):
     RESOLVED = "resolved"
     COERCED = "coerced"
-    NULL = "null"
-    MISSING = "missing"
+    NULL = "null"        # key present, value was null
+    MISSING = "missing"  # key absent
+    INVALID = "invalid"  # key present, value present, but uncoercible (e.g. "abc" as int)
 
 
 _SENTINEL = object()
@@ -54,7 +55,8 @@ def extract(payload: Dict[str, Any], path: str, default: Any,
         try:
             return coerce(cur), FieldStatus.COERCED
         except (TypeError, ValueError):
-            return default, FieldStatus.MISSING
+            # present but malformed -- distinct from absent, must not be silently dropped
+            return default, FieldStatus.INVALID
 
     return cur, FieldStatus.RESOLVED
 
@@ -102,5 +104,5 @@ class CanonicalEvent:
     def silent_risk(self) -> bool:
         """True if a money field fell back to a default/null -- the signal a stream
         monitor watches, with no oracle required."""
-        return any(self.field_status.get(f) in (FieldStatus.MISSING, FieldStatus.NULL)
+        return any(self.field_status.get(f) in (FieldStatus.MISSING, FieldStatus.NULL, FieldStatus.INVALID)
                    for f in MONEY_FIELDS)

@@ -42,7 +42,7 @@ class StoredEvent:
 
 class EventStore:
     # provenance values that mean "no real fact here yet, safe to backfill"
-    _FILLABLE = (FieldStatus.MISSING, FieldStatus.NULL)
+    _FILLABLE = (FieldStatus.MISSING, FieldStatus.NULL, FieldStatus.INVALID)
 
     def __init__(self):
         self._store: Dict[str, StoredEvent] = {}

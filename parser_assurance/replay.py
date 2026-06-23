@@ -55,7 +55,7 @@ class Monitor:
         c = self._counts[provider]
         c["total"] += 1
         for f in MONEY_FIELDS:
-            if field_status.get(f) in (FieldStatus.MISSING, FieldStatus.NULL):
+            if field_status.get(f) in (FieldStatus.MISSING, FieldStatus.NULL, FieldStatus.INVALID):
                 c["miss"][f] += 1
 
     def alarms(self) -> List[Dict[str, Any]]:
