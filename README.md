@@ -1,5 +1,7 @@
 # Replay-Based Parser Assurance
 
+[![CI](https://github.com/LakshyaBetala/replay-assurance/actions/workflows/ci.yml/badge.svg)](https://github.com/LakshyaBetala/replay-assurance/actions/workflows/ci.yml)
+
 **Execution success ≠ canonical correctness.** A parser can run cleanly for months and quietly produce the wrong numbers.
 
 This is a working prototype for catching the failure mode where a provider changes a payload shape, the parser keeps executing without throwing, and a cost/usage number silently goes to zero on every downstream dashboard — the kind of bug a customer notices before the engineers do.
@@ -42,14 +44,23 @@ That signal exists on a stream of *one* provider's live traffic, with no `expect
 
 ## Quickstart
 
+The runtime has **zero dependencies** (stdlib only); `pip install` is just for the test runner and console scripts.
+
 ```bash
-# stdlib only, no dependencies
-python parser_assurance/scripts/generate_corpus.py   # optional: 1000-payload synthetic corpus
-python parser_assurance/simulation.py                # full end-to-end demo
-python -m pytest tests/ -q                           # the thesis + invariants as assertions
+pip install -e ".[dev]"      # or: make install
+make demo                    # generate seeded corpus + run the full end-to-end story
+make test                    # 8 assertions: the thesis + every store invariant
 ```
 
-Without generating the corpus, everything still runs against the committed **real captured payloads** (`data/corpus/*/v_real/`).
+Equivalent without make:
+
+```bash
+python -m parser_assurance.scripts.generate_corpus   # seeded → identical numbers every run
+python -m parser_assurance                           # full demo (also the smoke test; exits non-zero on any crash)
+pytest
+```
+
+Without generating the corpus, everything still runs against the committed **real captured payloads** (`parser_assurance/data/corpus/*/v_real/`).
 
 ## What's real, what's synthetic
 
