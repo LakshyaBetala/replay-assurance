@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Generated synthetic corpus (reproduce with: python parser_assurance/scripts/generate_corpus.py).
+# Real captured fixtures under v_real/ are committed deliberately.
+parser_assurance/data/corpus/*/v1/
+parser_assurance/data/corpus/*/v2/
+parser_assurance/data/corpus/*/v3/
+
+# Quarantine output is a generated artifact of a replay run.
+parser_assurance/data/unknown_drifts/
