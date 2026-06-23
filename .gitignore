@@ -4,6 +4,9 @@ __pycache__/
 .pytest_cache/
 .venv/
 venv/
+*.egg-info/
+build/
+dist/
 
 # Generated synthetic corpus (reproduce with: python parser_assurance/scripts/generate_corpus.py).
 # Real captured fixtures under v_real/ are committed deliberately.
