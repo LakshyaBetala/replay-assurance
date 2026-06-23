@@ -10,7 +10,7 @@ running and reports MISSING -- the silent failure stops being silent.
 
 from typing import Any, Dict
 
-from canonical import CanonicalEvent, FieldStatus, extract
+from .canonical import CanonicalEvent, FieldStatus, extract
 
 
 class BasePayloadParser:

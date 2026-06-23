@@ -6,17 +6,14 @@ Runs over committed real-payload fixtures (no corpus generation needed).
 """
 
 import os
-import sys
 
-HERE = os.path.dirname(__file__)
-PKG = os.path.join(HERE, "..", "parser_assurance")
-sys.path.insert(0, os.path.abspath(PKG))
+from parser_assurance.replay import ReplayHarness
+from parser_assurance.drift import DriftDetector
+from parser_assurance.event_store import EventStore
+from parser_assurance.parser import get_parser
+from parser_assurance.canonical import FieldStatus
 
-from replay import ReplayHarness          # noqa: E402
-from drift import DriftDetector           # noqa: E402
-from event_store import EventStore        # noqa: E402
-from parser import get_parser             # noqa: E402
-from canonical import FieldStatus         # noqa: E402
+PKG = os.path.join(os.path.dirname(__file__), "..", "parser_assurance")
 
 
 def _report():

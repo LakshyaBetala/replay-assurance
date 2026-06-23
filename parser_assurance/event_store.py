@@ -19,7 +19,7 @@ Three invariants the founder's writeup calls out, made concrete here:
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
-from canonical import CanonicalEvent, FieldStatus
+from .canonical import CanonicalEvent, FieldStatus
 
 
 @dataclass

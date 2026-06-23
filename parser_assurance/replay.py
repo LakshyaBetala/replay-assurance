@@ -17,15 +17,13 @@ Two complementary detectors, because neither is sufficient alone:
 import os
 import glob
 import json
-import sys
 from collections import defaultdict
 from typing import Any, Dict, List
 
-sys.path.insert(0, os.path.dirname(__file__))
-from parser import get_parser
-from canonical import FieldStatus, MONEY_FIELDS
-from drift import DriftDetector
-from impact import ImpactMapper
+from .parser import get_parser
+from .canonical import FieldStatus, MONEY_FIELDS
+from .drift import DriftDetector
+from .impact import ImpactMapper
 
 CANONICAL_FIELDS = ["event_id", "provider", "model", "tokens", "cost", "timestamp"]
 
@@ -101,6 +99,11 @@ class ReplayHarness:
             "total": 0, "execution_success": 0, "canonical_match": 0,
             "fields": defaultdict(lambda: {"match": 0, "total": 0}),
         })
+
+        # A replay is a fresh assessment: clear prior quarantine so the count
+        # reflects THIS run, not an accumulation of stale files across runs.
+        for stale in glob.glob(os.path.join(self.quarantine_dir, "*.json")):
+            os.remove(stale)
 
         payload_files = glob.glob(os.path.join(self.corpus_dir, "**", "payload_*.json"), recursive=True)
 

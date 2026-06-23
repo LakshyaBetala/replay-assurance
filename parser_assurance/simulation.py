@@ -5,17 +5,14 @@ this still runs against the committed real-payload fixtures.
 """
 
 import os
-import sys
 import json
 import glob
 
-sys.path.insert(0, os.path.dirname(__file__))
-
-from parser import ClaudeDay1Parser, get_parser
-from replay import ReplayHarness
-from drift import DriftDetector
-from impact import ImpactMapper
-from event_store import EventStore
+from .parser import ClaudeDay1Parser, get_parser
+from .replay import ReplayHarness
+from .drift import DriftDetector
+from .impact import ImpactMapper
+from .event_store import EventStore
 
 
 def section(title):
