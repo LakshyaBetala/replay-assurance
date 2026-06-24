@@ -33,7 +33,7 @@ This prototype runs **two complementary detectors**, because each covers the oth
 | **Replay harness** | Yes (golden corpus) | Anything, incl. type drift that still yields a plausible value | CI — prove a fix for one provider didn't regress five others |
 | **Stream monitor** | **No** | Field moved / disappeared, the day it ships | Production — on live traffic, nothing to diff against |
 
-The monitor is the answer to the obvious objection *("you only catch drifts you scripted into your corpus")*. It doesn't use the corpus at all. Parsers emit **field provenance** — for every field, whether the value was `RESOLVED`, `COERCED`, `NULL`, or `MISSING` — and the monitor alarms when a money field's `MISSING` rate spikes for a provider:
+The monitor is the answer to the obvious objection *("you only catch drifts you scripted into your corpus")*. It doesn't use the corpus at all. Parsers emit **field provenance** — for every field, whether the value was `RESOLVED`, `COERCED` (present but type-cast), `NULL`, `INVALID` (present but malformed), or `MISSING` — and the monitor alarms when a money field's non-real rate spikes for a provider:
 
 ```
 [ALARM] tokens defaulted on 62.6% of claude traffic -- probable schema change
