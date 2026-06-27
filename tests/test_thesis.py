@@ -12,6 +12,7 @@ from parser_assurance.drift import DriftDetector
 from parser_assurance.event_store import EventStore
 from parser_assurance.parser import get_parser
 from parser_assurance.canonical import FieldStatus
+from parser_assurance.evaluation import evaluate
 
 PKG = os.path.join(os.path.dirname(__file__), "..", "parser_assurance")
 
@@ -87,6 +88,17 @@ def test_backfill_then_correction_are_distinguished():
     assert s.cost == 0.05
     assert any("backfill cost" in r for r in s.revisions)
     assert any("correction cost" in r for r in s.revisions)
+
+
+def test_monitor_beats_naive_threshold_on_confounders():
+    r = evaluate()
+    sp, sr, sfp, sfn = r["smart"]["score"]
+    # The change-detector catches every real drift with zero false positives...
+    assert sr == 1.0 and sfp == 0
+    # ...where the naive absolute-threshold detector false-positives on benign
+    # variance / low traffic. That gap is the point.
+    _np, _nr, nfp, _nfn = r["naive"]["score"]
+    assert nfp > sfp
 
 
 def test_malformed_value_is_invalid_not_missing():

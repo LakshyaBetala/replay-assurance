@@ -37,39 +37,61 @@ REFERENCE_PAYLOADS: Dict[str, Dict[str, Any]] = {
     "gemini":     {"id": "ref", "model": "ref", "tokenCount": 1, "cost": 1.0, "time": "ref"},
 }
 
-# If a money field is MISSING/NULL on more than this share of a provider's
-# traffic, treat it as a probable shape change rather than noise.
-MONITOR_THRESHOLD = 0.05
+_NON_REAL = (FieldStatus.MISSING, FieldStatus.NULL, FieldStatus.INVALID)
 
 
 class Monitor:
-    """Oracle-free: consumes only the provenance parsers emit on live traffic."""
+    """Oracle-free drift detector over a stream of parser provenance.
 
-    def __init__(self, threshold: float = MONITOR_THRESHOLD):
-        self.threshold = threshold
-        self._counts = defaultdict(lambda: {"total": 0, "miss": defaultdict(int)})
+    The naive version of this thresholds the absolute missing-rate. That false-
+    positives constantly in production: a free-tier provider whose cost is
+    legitimately absent 30% of the time would trip it forever. The real signal of
+    a schema change is not a *high* missing-rate, it is a *sudden jump* in it.
+
+    So we compare a baseline window (earlier traffic) against a recent window
+    (latest traffic) per provider+field, and alarm only when the recent rate
+    jumps well above the baseline. Steady elevated variance -> no alarm. A field
+    that moves on Tuesday (0% -> 60%) -> alarm. See evaluation.py for the measured
+    precision/recall against benign-variance, partial-rollout and low-traffic
+    confounders.
+    """
+
+    def __init__(self, min_events: int = 20, window_frac: float = 0.4,
+                 jump: float = 0.25, min_recent: float = 0.3):
+        self.min_events = min_events
+        self.window_frac = window_frac
+        self.jump = jump
+        self.min_recent = min_recent
+        # provider -> field -> ordered list of "value was not real" booleans
+        self._seq = defaultdict(lambda: defaultdict(list))
 
     def observe(self, provider: str, field_status: Dict[str, FieldStatus]):
-        c = self._counts[provider]
-        c["total"] += 1
         for f in MONEY_FIELDS:
-            if field_status.get(f) in (FieldStatus.MISSING, FieldStatus.NULL, FieldStatus.INVALID):
-                c["miss"][f] += 1
+            self._seq[provider][f].append(field_status.get(f) in _NON_REAL)
+
+    @staticmethod
+    def _rate(seq: List[bool]) -> float:
+        return sum(seq) / len(seq) if seq else 0.0
 
     def alarms(self) -> List[Dict[str, Any]]:
         out = []
-        for provider, c in self._counts.items():
-            total = c["total"] or 1
-            for f in MONEY_FIELDS:
-                rate = c["miss"][f] / total
-                if rate > self.threshold:
+        for provider, fields in self._seq.items():
+            for f, seq in fields.items():
+                n = len(seq)
+                if n < self.min_events:
+                    continue
+                w = max(1, int(n * self.window_frac))
+                base_rate = self._rate(seq[:w])
+                recent_rate = self._rate(seq[-w:])
+                if recent_rate - base_rate >= self.jump and recent_rate >= self.min_recent:
                     out.append({
                         "provider": provider, "field": f,
-                        "missing_rate": round(rate * 100, 1),
-                        "signal": f"{f} defaulted on {rate*100:.1f}% of {provider} traffic "
-                                  f"-- probable schema change",
+                        "baseline_rate": round(base_rate * 100, 1),
+                        "recent_rate": round(recent_rate * 100, 1),
+                        "signal": f"{f} on {provider}: {base_rate*100:.0f}% -> "
+                                  f"{recent_rate*100:.0f}% defaulted -- probable schema change",
                     })
-        return sorted(out, key=lambda a: a["missing_rate"], reverse=True)
+        return sorted(out, key=lambda a: a["recent_rate"] - a["baseline_rate"], reverse=True)
 
 
 class ReplayHarness:
@@ -106,6 +128,15 @@ class ReplayHarness:
             os.remove(stale)
 
         payload_files = glob.glob(os.path.join(self.corpus_dir, "**", "payload_*.json"), recursive=True)
+
+        # Feed the stream monitor chronologically: v1 (before) then v2/v3 (after),
+        # so a relocation shows up as a jump in the field's missing-rate over time.
+        version_rank = {"v1": 0, "v2": 1, "v3": 2, "v_real": 3}
+        payload_files.sort(key=lambda p: (
+            p.split(os.sep)[-3],                          # provider
+            version_rank.get(p.split(os.sep)[-2], 9),     # version (time)
+            p,                                            # filename
+        ))
 
         for payload_path in payload_files:
             provider = payload_path.split(os.sep)[-3]

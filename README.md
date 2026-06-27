@@ -42,6 +42,21 @@ The monitor is the answer to the obvious objection *("you only catch drifts you 
 
 That signal exists on a stream of *one* provider's live traffic, with no `expected` value anywhere. That is the mechanism that catches the move before the customer does.
 
+**But a detector is only as good as its false-positive rate.** A high missing-rate isn't a schema change — some fields are just often empty. So the monitor alarms on a *jump* (baseline window vs. recent window), not an absolute level, and [`evaluation.py`](parser_assurance/evaluation.py) measures it against the confounders that fool a naive threshold:
+
+```
+                  truth        change-detector   naive >5%
+drift_cost        cost         cost              cost
+partial_rollout   cost         cost              cost
+benign_variance   (no drift)   -                 cost   <- naive false-positive
+low_traffic       (no drift)   -                 cost   <- naive false-positive
+
+change-detector : precision 100.0%  recall 100.0%  false-positives 0
+naive >5%       : precision  60.0%  recall 100.0%  false-positives 2
+```
+
+Measuring the detector, not just the disease, is the difference between a demo and an observability tool.
+
 ## Quickstart
 
 The runtime has **zero dependencies** (stdlib only); `pip install` is just for the test runner and console scripts.

@@ -13,6 +13,7 @@ from .replay import ReplayHarness
 from .drift import DriftDetector
 from .impact import ImpactMapper
 from .event_store import EventStore
+from .evaluation import print_evaluation
 
 
 def section(title):
@@ -39,8 +40,8 @@ def main():
 
     # -- 2. Oracle-free monitor (works on a live stream) --
     section("2. MONITOR (production: NO oracle, just parser provenance)")
-    print("\nThe parsers report when a money field fell back to a default.")
-    print("A spike = a field moved. Caught on a stream, nothing to diff against:\n")
+    print("\nEvents replayed in time order. The monitor alarms on a JUMP in a money")
+    print("field's default-rate (a field moved), not merely a high rate:\n")
     alarms = harness.monitor.alarms()
     if alarms:
         for a in alarms:
@@ -48,8 +49,14 @@ def main():
     else:
         print("  (no alarms; money fields resolved cleanly)")
 
-    # -- 3. Value-matched relocation (the headline drift) --
-    section("3. RELOCATION DETECTION (tokens -> usage.total_tokens)")
+    # -- 3. Detector evaluation: precision/recall vs confounders --
+    section("3. DETECTOR EVALUATION (is the monitor any good?)")
+    print("\nMeasured against the confounders that fool a naive threshold:")
+    print("benign variance, partial rollout, low traffic.\n")
+    print_evaluation()
+
+    # -- 4. Value-matched relocation (the headline drift) --
+    section("4. RELOCATION DETECTION (tokens -> usage.total_tokens)")
     before = {"id": "e1", "model": "claude-3-opus", "tokens": 420, "billing_cost": 0.042}
     after = {"id": "e1", "model": "claude-3-opus", "usage": {"total_tokens": 420}, "billing_cost": 0.042}
     drifts = DriftDetector().detect(before, after)
@@ -66,7 +73,7 @@ def main():
           f"-- ran clean, value wrong")
 
     # -- 4. Dedup + late-fact reconciliation --
-    section("4. DEDUP + LATE FACTS (stable key, never double-count)")
+    section("5. DEDUP + LATE FACTS (stable key, never double-count)")
     store = EventStore()
     p = get_parser("claude")
 
@@ -104,7 +111,7 @@ def main():
         print(f"  - {r}")
 
     # -- 5. One auto-explained quarantine entry (real payload) --
-    section("5. AUTO-EXPLAINED QUARANTINE (real captured payload)")
+    section("6. AUTO-EXPLAINED QUARANTINE (real captured payload)")
     example = None
     # Prefer a real captured payload (nested per-token usage we never scripted).
     for q in sorted(glob.glob(os.path.join(harness.quarantine_dir, "*.json"))):
