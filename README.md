@@ -1,7 +1,7 @@
 # Replay Assurance
 
 [![CI](https://github.com/LakshyaBetala/replay-assurance/actions/workflows/ci.yml/badge.svg)](https://github.com/LakshyaBetala/replay-assurance/actions/workflows/ci.yml)
-![Python](https://img.shields.io/badge/python-3.9%20%7C%203.11%20%7C%203.12-blue)
+![Python](https://img.shields.io/badge/python-3.10%20%7C%203.12%20%7C%203.13-blue)
 ![Dependencies](https://img.shields.io/badge/runtime%20dependencies-0-brightgreen)
 [![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
 
