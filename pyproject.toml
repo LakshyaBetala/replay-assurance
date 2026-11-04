@@ -17,6 +17,7 @@ dev = ["pytest>=7"]
 [project.scripts]
 replay-demo = "parser_assurance.simulation:main"
 replay-gen-corpus = "parser_assurance.scripts.generate_corpus:main"
+replay-check = "parser_assurance.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["parser_assurance*"]

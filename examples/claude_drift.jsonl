@@ -1,0 +1,60 @@
+{"provider": "claude", "payload": {"id": "msg_000", "model": "claude-sonnet", "billing_cost": 0.006156, "timestamp": "2026-10-01T09:00:00Z", "tokens": 2052}}
+{"provider": "claude", "payload": {"id": "msg_001", "model": "claude-sonnet", "billing_cost": 0.011238, "timestamp": "2026-10-01T09:00:00Z", "tokens": 3746}}
+{"provider": "claude", "payload": {"id": "msg_002", "model": "claude-sonnet", "billing_cost": 0.007476, "timestamp": "2026-10-02T09:00:00Z", "tokens": 2492}}
+{"provider": "claude", "payload": {"id": "msg_003", "model": "claude-sonnet", "billing_cost": 0.011127, "timestamp": "2026-10-02T09:00:00Z", "tokens": 3709}}
+{"provider": "claude", "payload": {"id": "msg_004", "model": "claude-sonnet", "billing_cost": 0.011955, "timestamp": "2026-10-03T09:00:00Z", "tokens": 3985}}
+{"provider": "claude", "payload": {"id": "msg_005", "model": "claude-sonnet", "billing_cost": 0.010197, "timestamp": "2026-10-03T09:00:00Z", "tokens": 3399}}
+{"provider": "claude", "payload": {"id": "msg_006", "model": "claude-sonnet", "billing_cost": 0.006321, "timestamp": "2026-10-04T09:00:00Z", "tokens": 2107}}
+{"provider": "claude", "payload": {"id": "msg_007", "model": "claude-sonnet", "billing_cost": 0.00615, "timestamp": "2026-10-04T09:00:00Z", "tokens": 2050}}
+{"provider": "claude", "payload": {"id": "msg_008", "model": "claude-sonnet", "billing_cost": 0.00684, "timestamp": "2026-10-05T09:00:00Z", "tokens": 2280}}
+{"provider": "claude", "payload": {"id": "msg_009", "model": "claude-sonnet", "billing_cost": 0.011106, "timestamp": "2026-10-05T09:00:00Z", "tokens": 3702}}
+{"provider": "claude", "payload": {"id": "msg_010", "model": "claude-sonnet", "billing_cost": 0.007815, "timestamp": "2026-10-06T09:00:00Z", "tokens": 2605}}
+{"provider": "claude", "payload": {"id": "msg_011", "model": "claude-sonnet", "billing_cost": 0.002931, "timestamp": "2026-10-06T09:00:00Z", "tokens": 977}}
+{"provider": "claude", "payload": {"id": "msg_012", "model": "claude-sonnet", "billing_cost": 0.002868, "timestamp": "2026-10-07T09:00:00Z", "tokens": 956}}
+{"provider": "claude", "payload": {"id": "msg_013", "model": "claude-sonnet", "billing_cost": 0.010476, "timestamp": "2026-10-07T09:00:00Z", "tokens": 3492}}
+{"provider": "claude", "payload": {"id": "msg_014", "model": "claude-sonnet", "billing_cost": 0.006888, "timestamp": "2026-10-08T09:00:00Z", "tokens": 2296}}
+{"provider": "claude", "payload": {"id": "msg_015", "model": "claude-sonnet", "billing_cost": 0.006444, "timestamp": "2026-10-08T09:00:00Z", "tokens": 2148}}
+{"provider": "claude", "payload": {"id": "msg_016", "model": "claude-sonnet", "billing_cost": 0.008337, "timestamp": "2026-10-09T09:00:00Z", "tokens": 2779}}
+{"provider": "claude", "payload": {"id": "msg_017", "model": "claude-sonnet", "billing_cost": 0.008142, "timestamp": "2026-10-09T09:00:00Z", "tokens": 2714}}
+{"provider": "claude", "payload": {"id": "msg_018", "model": "claude-sonnet", "billing_cost": 0.010344, "timestamp": "2026-10-10T09:00:00Z", "tokens": 3448}}
+{"provider": "claude", "payload": {"id": "msg_019", "model": "claude-sonnet", "billing_cost": 0.002886, "timestamp": "2026-10-10T09:00:00Z", "tokens": 962}}
+{"provider": "claude", "payload": {"id": "msg_020", "model": "claude-sonnet", "billing_cost": 0.001755, "timestamp": "2026-10-11T09:00:00Z", "tokens": 585}}
+{"provider": "claude", "payload": {"id": "msg_021", "model": "claude-sonnet", "billing_cost": 0.006087, "timestamp": "2026-10-11T09:00:00Z", "tokens": 2029}}
+{"provider": "claude", "payload": {"id": "msg_022", "model": "claude-sonnet", "billing_cost": 0.004326, "timestamp": "2026-10-12T09:00:00Z", "tokens": 1442}}
+{"provider": "claude", "payload": {"id": "msg_023", "model": "claude-sonnet", "billing_cost": 0.00234, "timestamp": "2026-10-12T09:00:00Z", "tokens": 780}}
+{"provider": "claude", "payload": {"id": "msg_024", "model": "claude-sonnet", "billing_cost": 0.001713, "timestamp": "2026-10-13T09:00:00Z", "tokens": 571}}
+{"provider": "claude", "payload": {"id": "msg_025", "model": "claude-sonnet", "billing_cost": 0.007218, "timestamp": "2026-10-13T09:00:00Z", "tokens": 2406}}
+{"provider": "claude", "payload": {"id": "msg_026", "model": "claude-sonnet", "billing_cost": 0.010548, "timestamp": "2026-10-14T09:00:00Z", "tokens": 3516}}
+{"provider": "claude", "payload": {"id": "msg_027", "model": "claude-sonnet", "billing_cost": 0.011538, "timestamp": "2026-10-14T09:00:00Z", "tokens": 3846}}
+{"provider": "claude", "payload": {"id": "msg_028", "model": "claude-sonnet", "billing_cost": 0.00912, "timestamp": "2026-10-15T09:00:00Z", "tokens": 3040}}
+{"provider": "claude", "payload": {"id": "msg_029", "model": "claude-sonnet", "billing_cost": 0.008394, "timestamp": "2026-10-15T09:00:00Z", "tokens": 2798}}
+{"provider": "claude", "payload": {"id": "msg_030", "model": "claude-sonnet", "billing_cost": 0.001113, "timestamp": "2026-10-16T09:00:00Z", "usage": {"total_tokens": 371}}}
+{"provider": "claude", "payload": {"id": "msg_031", "model": "claude-sonnet", "billing_cost": 0.007914, "timestamp": "2026-10-16T09:00:00Z", "usage": {"total_tokens": 2638}}}
+{"provider": "claude", "payload": {"id": "msg_032", "model": "claude-sonnet", "billing_cost": 0.005466, "timestamp": "2026-10-17T09:00:00Z", "usage": {"total_tokens": 1822}}}
+{"provider": "claude", "payload": {"id": "msg_033", "model": "claude-sonnet", "billing_cost": 0.006165, "timestamp": "2026-10-17T09:00:00Z", "usage": {"total_tokens": 2055}}}
+{"provider": "claude", "payload": {"id": "msg_034", "model": "claude-sonnet", "billing_cost": 0.008634, "timestamp": "2026-10-18T09:00:00Z", "usage": {"total_tokens": 2878}}}
+{"provider": "claude", "payload": {"id": "msg_035", "model": "claude-sonnet", "billing_cost": 0.009678, "timestamp": "2026-10-18T09:00:00Z", "usage": {"total_tokens": 3226}}}
+{"provider": "claude", "payload": {"id": "msg_036", "model": "claude-sonnet", "billing_cost": 0.008163, "timestamp": "2026-10-19T09:00:00Z", "usage": {"total_tokens": 2721}}}
+{"provider": "claude", "payload": {"id": "msg_037", "model": "claude-sonnet", "billing_cost": 0.008586, "timestamp": "2026-10-19T09:00:00Z", "usage": {"total_tokens": 2862}}}
+{"provider": "claude", "payload": {"id": "msg_038", "model": "claude-sonnet", "billing_cost": 0.002535, "timestamp": "2026-10-20T09:00:00Z", "usage": {"total_tokens": 845}}}
+{"provider": "claude", "payload": {"id": "msg_039", "model": "claude-sonnet", "billing_cost": 0.008256, "timestamp": "2026-10-20T09:00:00Z", "usage": {"total_tokens": 2752}}}
+{"provider": "claude", "payload": {"id": "msg_040", "model": "claude-sonnet", "billing_cost": 0.000783, "timestamp": "2026-10-21T09:00:00Z", "usage": {"total_tokens": 261}}}
+{"provider": "claude", "payload": {"id": "msg_041", "model": "claude-sonnet", "billing_cost": 0.010818, "timestamp": "2026-10-21T09:00:00Z", "usage": {"total_tokens": 3606}}}
+{"provider": "claude", "payload": {"id": "msg_042", "model": "claude-sonnet", "billing_cost": 0.007092, "timestamp": "2026-10-22T09:00:00Z", "usage": {"total_tokens": 2364}}}
+{"provider": "claude", "payload": {"id": "msg_043", "model": "claude-sonnet", "billing_cost": 0.001374, "timestamp": "2026-10-22T09:00:00Z", "usage": {"total_tokens": 458}}}
+{"provider": "claude", "payload": {"id": "msg_044", "model": "claude-sonnet", "billing_cost": 0.001329, "timestamp": "2026-10-23T09:00:00Z", "usage": {"total_tokens": 443}}}
+{"provider": "claude", "payload": {"id": "msg_045", "model": "claude-sonnet", "billing_cost": 0.001038, "timestamp": "2026-10-23T09:00:00Z", "usage": {"total_tokens": 346}}}
+{"provider": "claude", "payload": {"id": "msg_046", "model": "claude-sonnet", "billing_cost": 0.002937, "timestamp": "2026-10-24T09:00:00Z", "usage": {"total_tokens": 979}}}
+{"provider": "claude", "payload": {"id": "msg_047", "model": "claude-sonnet", "billing_cost": 0.011406, "timestamp": "2026-10-24T09:00:00Z", "usage": {"total_tokens": 3802}}}
+{"provider": "claude", "payload": {"id": "msg_048", "model": "claude-sonnet", "billing_cost": 0.00357, "timestamp": "2026-10-25T09:00:00Z", "usage": {"total_tokens": 1190}}}
+{"provider": "claude", "payload": {"id": "msg_049", "model": "claude-sonnet", "billing_cost": 0.007968, "timestamp": "2026-10-25T09:00:00Z", "usage": {"total_tokens": 2656}}}
+{"provider": "claude", "payload": {"id": "msg_050", "model": "claude-sonnet", "billing_cost": 0.000969, "timestamp": "2026-10-26T09:00:00Z", "usage": {"total_tokens": 323}}}
+{"provider": "claude", "payload": {"id": "msg_051", "model": "claude-sonnet", "billing_cost": 0.010161, "timestamp": "2026-10-26T09:00:00Z", "usage": {"total_tokens": 3387}}}
+{"provider": "claude", "payload": {"id": "msg_052", "model": "claude-sonnet", "billing_cost": 0.0063, "timestamp": "2026-10-27T09:00:00Z", "usage": {"total_tokens": 2100}}}
+{"provider": "claude", "payload": {"id": "msg_053", "model": "claude-sonnet", "billing_cost": 0.004608, "timestamp": "2026-10-27T09:00:00Z", "usage": {"total_tokens": 1536}}}
+{"provider": "claude", "payload": {"id": "msg_054", "model": "claude-sonnet", "billing_cost": 0.006012, "timestamp": "2026-10-28T09:00:00Z", "usage": {"total_tokens": 2004}}}
+{"provider": "claude", "payload": {"id": "msg_055", "model": "claude-sonnet", "billing_cost": 0.00786, "timestamp": "2026-10-28T09:00:00Z", "usage": {"total_tokens": 2620}}}
+{"provider": "claude", "payload": {"id": "msg_056", "model": "claude-sonnet", "billing_cost": 0.01095, "timestamp": "2026-10-29T09:00:00Z", "usage": {"total_tokens": 3650}}}
+{"provider": "claude", "payload": {"id": "msg_057", "model": "claude-sonnet", "billing_cost": 0.003, "timestamp": "2026-10-29T09:00:00Z", "usage": {"total_tokens": 1000}}}
+{"provider": "claude", "payload": {"id": "msg_058", "model": "claude-sonnet", "billing_cost": 0.006978, "timestamp": "2026-10-30T09:00:00Z", "usage": {"total_tokens": 2326}}}
+{"provider": "claude", "payload": {"id": "msg_059", "model": "claude-sonnet", "billing_cost": 0.003471, "timestamp": "2026-10-30T09:00:00Z", "usage": {"total_tokens": 1157}}}

@@ -24,3 +24,8 @@ jobs:
         run: pytest
       - name: Smoke test (end-to-end demo must exit 0)
         run: python -m parser_assurance
+      - name: replay-check catches the drift in the example stream (must exit 1)
+        run: |
+          set +e
+          replay-check examples/claude_drift.jsonl
+          test $? -eq 1
